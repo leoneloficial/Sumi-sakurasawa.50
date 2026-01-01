@@ -1,0 +1,32 @@
+{
+  "name": "Meow-WaBot",
+  "version": "1.2.0",
+  "description": "Un bot sencillo y funcional para Whatsapp",
+  "main": "bot.js",
+  "type": "module",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "awesome-phonenumber": "^3.4.0",
+    "@whiskeysockets/baileys": "github:Ado21/BailFork",
+    "chalk": "^5.3.0",
+    "jimp": "^1.6.0",
+    "qrcode": "^1.5.1",
+    "node-cache": "^5.1.2",
+    "readline-sync": "^1.4.10",
+    "pino": "^8.21.0",
+    "node-fetch": "^3.3.2",
+    "form-data": "^4.0.0",
+    "jsdom": "^20.0.1",
+    "formdata-node": "^5.0.0",
+    "file-type": "^18.0.0",
+    "yt-search": "^2.10.3",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "bcryptjs": "^2.4.3",
+    "nanoid": "^5.0.7",
+    "multer": "^1.4.5-lts.1"
+  }
+}
