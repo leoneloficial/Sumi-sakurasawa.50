@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meow SubBots · Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <i class="fas fa-snowflake logo-icon"></i>
+      <div>
+        <div class="logo-text">Meow SubBots</div>
+        <div class="logo-slogan" id="slogan">☃️ Cargando…</div>
+      </div>
+    </div>
+    <div class="header-buttons">
+      <button class="tag-btn" id="btnLogout"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="hero">
+      <div class="h1">Dashboard</div>
+      <div class="p">Vincula tu subbot, personalízalo y maneja sus grupos.</div>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <div class="card-h">
+          <div>
+            <div class="card-title">Tu SubBot</div>
+            <div class="card-sub" id="subbotSub">—</div>
+          </div>
+          <div class="badge" id="subbotBadge">—</div>
+        </div>
+        <div class="card-b">
+          <div class="kpi">
+            <div class="pill">
+              <div class="label">Subbots online (global)</div>
+              <div class="value" id="kpiGlobal">—</div>
+            </div>
+            <div class="pill">
+              <div class="label">Estado de tu sesión</div>
+              <div class="value" id="kpiMine">—</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="row">
+            <button class="btn primary" id="btnLink"><i class="fa-solid fa-link"></i> Vincular</button>
+            <button class="btn" id="btnCustomize"><i class="fa-solid fa-pen-to-square"></i> Personalizar</button>
+            <button class="btn green" id="btnManage"><i class="fa-solid fa-gear"></i> Manejar</button>
+          </div>
+
+          <div class="note" style="margin-top:10px">
+            *Vincular* crea la sesión en <b>Sessions/SubBotTemp/&lt;tuNumero&gt;</b>.
+          </div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div class="card-h">
+          <div>
+            <div class="card-title">Preview</div>
+            <div class="card-sub">Nombre y banner actuales</div>
+          </div>
+        </div>
+        <div class="card-b">
+          <div class="profile">
+            <img id="bannerImg" class="banner" alt="banner" />
+            <div>
+              <div class="profile-name" id="profileName">—</div>
+              <div class="profile-meta" id="profileMeta">—</div>
+            </div>
+          </div>
+          <div class="note" id="profileHint" style="margin-top:10px">Conecta tu subbot para editar nombre/banner.</div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="card" style="margin-top:14px">
+      <div class="card-h">
+        <div>
+          <div class="card-title">Grupos</div>
+          <div class="card-sub">Se cargan cuando abras “Manejar”.</div>
+        </div>
+      </div>
+      <div class="card-b">
+          <div class="note">Tip: activa/desactiva <b>bot</b>, <b>antilink</b>, <b>welcome</b> y <b>avisos</b> por grupo.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODALS -->
+  <div class="modal" id="modalLink">
+    <div class="modal-card">
+      <div class="modal-h">
+        <div>
+          <div class="modal-title">Vincular SubBot</div>
+          <div class="modal-sub">Elige QR o Código.</div>
+        </div>
+        <button class="icon-btn" data-close="modalLink"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-b">
+        <div class="row">
+          <button class="btn" id="btnModeQr"><i class="fa-solid fa-qrcode"></i> QR</button>
+          <button class="btn" id="btnModeCode"><i class="fa-solid fa-key"></i> Código</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="pairArea" class="pair">
+          <div class="note">Selecciona un método…</div>
+        </div>
+
+        <div class="note" style="margin-top:10px">
+          WhatsApp → <b>Dispositivos vinculados</b> → <b>Vincular</b>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalCustomize">
+    <div class="modal-card">
+      <div class="modal-h">
+        <div>
+          <div class="modal-title">Personalizar</div>
+          <div class="modal-sub">Nombre y banner (como setname/setbanner).</div>
+        </div>
+        <button class="icon-btn" data-close="modalCustomize"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-b">
+        <div class="alert" id="customAlert"></div>
+        <form class="form" id="customForm">
+          <div class="field">
+            <label>Nombre</label>
+            <input class="input" name="name" placeholder="Mi Subbot" />
+          </div>
+          <div class="field">
+            <label>Banner (JPG/PNG)</label>
+            <input class="input" type="file" name="banner" accept="image/*" />
+            <div class="note">Con esto podrás ver tu banner personalizado en el menu :D</b>.</div>
+          </div>
+          <div class="field">
+            <label>Prefijo</label>
+            <input class="input" name="prefix" placeholder="# o 🔥" />
+            <div class="note">Cambia el prefijo de comandos de tu subbot (máx 12, sin espacios). Para resetear escribe <b>default</b>.</div>
+          </div>
+          <div class="row">
+            <button class="btn" type="button" id="btnSaveName"><i class="fa-solid fa-floppy-disk"></i> Guardar nombre</button>
+            <button class="btn green" type="button" id="btnSaveBanner"><i class="fa-solid fa-image"></i> Guardar banner</button>
+            <button class="btn" type="button" id="btnSavePrefix"><i class="fa-solid fa-hashtag"></i> Guardar prefijo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalManage">
+    <div class="modal-card" style="max-width: 860px;">
+      <div class="modal-h">
+        <div>
+          <div class="modal-title">Manejar grupos</div>
+          <div class="modal-sub">Activa/desactiva Welcome y Avisos.</div>
+        </div>
+        <button class="icon-btn" data-close="modalManage"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-b">
+        <div class="alert" id="manageAlert"></div>
+        <div class="table-wrap">
+          <table class="table" id="groupsTable">
+            <thead>
+              <tr>
+                <th>Grupo</th>
+                <th>Miembros</th>
+                <th>Bot</th>
+                <th>Antilink</th>
+                <th>Welcome</th>
+                <th>Avisos</th>
+              </tr>
+            </thead>
+            <tbody id="groupsBody">
+              <tr><td colspan="6" class="note">Cargando…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note" style="margin-top:10px">Los toggles se guardan en <b>biblioteca/settings.json</b> por subbot.</div>
+        <hr style="margin:16px 0; border:none; border-top:1px solid rgba(148,163,184,.35)" />
+
+        <div class="msg-editor" style="margin-bottom:14px">
+          <div class="row">
+            <div class="label">Primary por grupo</div>
+            <div class="note">Si eliges un primary, <b>solo ese bot</b> responderá comandos en ese grupo.</div>
+          </div>
+
+          <div class="row">
+            <label class="label" for="primaryGroupSelect">Grupo</label>
+            <select id="primaryGroupSelect" class="input"></select>
+          </div>
+
+          <div class="row">
+            <label class="label" for="primaryBotSelect">Bot primario</label>
+            <select id="primaryBotSelect" class="input"></select>
+          </div>
+
+          <div class="row row-actions">
+            <button class="btn btn-primary" id="setPrimaryBtn"><i class="fa-solid fa-star"></i> Set primary</button>
+            <button class="btn" id="clearPrimaryBtn"><i class="fa-solid fa-ban"></i> Quitar primary</button>
+          </div>
+
+          <div class="note" id="primaryHint" style="margin-top:8px">Solo podrás editar si el subbot es <b>admin</b> en ese grupo.</div>
+        </div>
+
+        <hr style="margin:16px 0; border:none; border-top:1px solid rgba(148,163,184,.35)" />
+        <div class="msg-editor">
+          <div class="row">
+            <div class="label">Mensajes Welcome/Bye</div>
+            <div class="note">Solo podrás editar si el subbot es <b>admin</b> en ese grupo.</div>
+          </div>
+
+          <div class="row">
+            <label class="label" for="msgGroupSelect">Grupo</label>
+            <select id="msgGroupSelect" class="input"></select>
+          </div>
+
+          <div class="row">
+            <label class="label" for="welcomeTpl">Welcome</label>
+            <textarea id="welcomeTpl" class="input" rows="5" placeholder="Ej: Bienvenido {mention} a {group}!"></textarea>
+          </div>
+
+          <div class="row">
+            <label class="label" for="byeTpl">Bye</label>
+            <textarea id="byeTpl" class="input" rows="5" placeholder="Ej: Adiós {mention}, gracias por estar aquí."></textarea>
+          </div>
+
+          <div class="row row-actions">
+            <button class="btn btn-primary" id="saveMsgsBtn"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+            <button class="btn" id="resetMsgsBtn"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+          </div>
+
+          <div class="note" style="margin-top:8px">
+            Placeholders: <b>{mention}</b> <b>{username}</b> <b>{group}</b> <b>{desc}</b> <b>{bot}</b>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">© 2025 Meow SubBots · By Ado 🎄</footer>
+
+  <script src="/assets/dashboard.js"></script>
+</body>
+</html>
