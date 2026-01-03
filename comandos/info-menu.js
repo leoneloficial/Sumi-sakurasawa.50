@@ -300,9 +300,14 @@ let handler = async (m, { conn }) => {
   const { prepareWAMessageMedia, generateWAMessageFromContent } = await import('@whiskeysockets/baileys')
 
   const contextInfo = {
-    forwardingScore: 999999,
-    isForwarded: true
+  forwardingScore: 999999,
+  isForwarded: true,
+  newsletterInfo: {
+    newsletterJid: '@newsletter',
+    newsletterName: 'bot',
+    serverMessageId: 1
   }
+}
 
   let header = { title: '' }
 
@@ -332,10 +337,10 @@ let handler = async (m, { conn }) => {
           interactiveMessage: {
             header,
             body: { text: menuText },
-            footer: { text: '' },
+            footer: { text: 'Hecho por *Ado* :D' },
             contextInfo,
             nativeFlowMessage: {
-              buttons: [
+              /*buttons: [
                 {
                   name: 'cta_url',
                   buttonParamsJson: JSON.stringify({
@@ -347,7 +352,7 @@ let handler = async (m, { conn }) => {
                   name: 'cta_url',
                   buttonParamsJson: JSON.stringify({
                     display_text: '𝗖𝗮𝗻𝗮𝗹',
-                    url: 'https://whatsapp.com/channel/0029Vagdmfv1SWt5nfdR4z3w'
+                    url: 'https://whatsapp.com/channel/0029Vb75yXeKbYMVbG6Gjv3w'
                   })
                 },
                 {
@@ -357,7 +362,7 @@ let handler = async (m, { conn }) => {
                     url: 'https://github.com/Ado21/WaMeowBot'
                   })
                 }
-              ]
+              ]*/
             }
           }
         }
