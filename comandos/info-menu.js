@@ -297,81 +297,32 @@ let handler = async (m, { conn }) => {
 > ❀ Actualiza el bot desde Git.
 `.trim()
 
-  const { prepareWAMessageMedia, generateWAMessageFromContent } = await import('@whiskeysockets/baileys')
 
-  const contextInfo = {
-  forwardingScore: 999999,
-  isForwarded: true,
-  forwardedNewsletterMessageInfo: {
-    newsletterJid: '120363324350463849@newsletter',
-    newsletterName: 'bot',
-    serverMessageId: 1
-  }
-}
-
-  let header = { title: '' }
-
-  try {
-    if (bannerExists) {
-      const media = await prepareWAMessageMedia(
-        { image: fs.readFileSync(bannerPath) },
-        { upload: conn.waUploadToServer }
-      )
-      header = { hasMediaAttachment: true, imageMessage: media.imageMessage }
-    } else if (typeof bannerPath === 'string' && /^https?:\/\//i.test(bannerPath)) {
-      const media = await prepareWAMessageMedia(
-        { image: { url: bannerPath } },
-        { upload: conn.waUploadToServer }
-      )
-      header = { hasMediaAttachment: true, imageMessage: media.imageMessage }
-    }
-  } catch {
-    header = { title: '' }
-  }
-
-  const content = generateWAMessageFromContent(
-    from,
-    {
-      viewOnceMessage: {
-        message: {
-          interactiveMessage: {
-            header,
-            body: { text: menuText },
-            footer: { text: 'Hecho por *Ado* :D' },
-            contextInfo,
-            nativeFlowMessage: {
-              /*buttons: [
-                {
-                  name: 'cta_url',
-                  buttonParamsJson: JSON.stringify({
-                    display_text: '𝗛𝗮𝘇𝘁𝗲 𝗦𝘂𝗯𝗕𝗼𝘁',
-                    url: 'https://meow.hostrta.win'
-                  })
-                },
-                {
-                  name: 'cta_url',
-                  buttonParamsJson: JSON.stringify({
-                    display_text: '𝗖𝗮𝗻𝗮𝗹',
-                    url: 'https://whatsapp.com/channel/0029Vb75yXeKbYMVbG6Gjv3w'
-                  })
-                },
-                {
-                  name: 'cta_url',
-                  buttonParamsJson: JSON.stringify({
-                    display_text: '𝗢𝗽𝗲𝗻 𝗦𝗼𝘂𝗿𝗰𝗲',
-                    url: 'https://github.com/Ado21/WaMeowBot'
-                  })
-                }
-              ]*/
+  await client.sendMessage(m.chat,
+          {
+            text: menuText,
+            contextInfo: {
+              mentionedJid: [m.sender],
+              isForwarded: true,
+              forwardedNewsletterMessageInfo: {
+                newsletterJid: "123456789101112@newsletter",
+                serverMessageId: 1,
+                newsletterName: "Pene bot"
+              },
+              externalAdReply: {
+                title: "pene bot",
+                body: `Hola`,
+                showAdAttribution: false,
+                thumbnail: fs.readFileSync(bannerPath),
+                mediaType: 1,
+                previewType: 0,
+                renderLargerThumbnail: true
+              }
             }
-          }
-        }
+          },
+          { quoted: m }
+        );
       }
-    },
-    { quoted: m }
-  )
-
-  await conn.relayMessage(from, content.message, { messageId: content.key.id })
 }
 
 handler.help = ['menu', 'help', 'ayuda']
