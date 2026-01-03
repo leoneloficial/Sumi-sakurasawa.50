@@ -302,7 +302,7 @@ let handler = async (m, { conn }) => {
   const contextInfo = {
   forwardingScore: 999999,
   isForwarded: true,
-  newsletterInfo: {
+  forwardedNewsletterMessageInfo: {
     newsletterJid: '@newsletter',
     newsletterName: 'bot',
     serverMessageId: 1
