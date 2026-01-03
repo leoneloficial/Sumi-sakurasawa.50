@@ -305,7 +305,7 @@ let handler = async (m, { conn }) => {
               mentionedJid: [m.sender],
               isForwarded: true,
               forwardedNewsletterMessageInfo: {
-                newsletterJid: "123456789101112@newsletter",
+                newsletterJid: "120363324350463849@newsletter",
                 serverMessageId: 1,
                 newsletterName: "Pene bot"
               },
