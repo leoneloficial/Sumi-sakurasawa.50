@@ -305,7 +305,7 @@ let handler = async (m, { conn }) => {
               mentionedJid: [m.sender],
               isForwarded: true,
               forwardedNewsletterMessageInfo: {
-                newsletterJid: "120363324350463849@newsletter",
+                newsletterJid: "123456789101112@newsletter",
                 serverMessageId: 1,
                 newsletterName: "Pene bot"
               },
@@ -323,7 +323,6 @@ let handler = async (m, { conn }) => {
           { quoted: m }
         );
       }
-}
 
 handler.help = ['menu', 'help', 'ayuda']
 handler.tags = ['main']
