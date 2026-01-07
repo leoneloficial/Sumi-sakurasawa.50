@@ -1,7 +1,7 @@
 const config = {
   nombrebot: '🤍 sumi sakurasawa 🤍',
   moneda: '$ᴅᴏʟᴀʀᴇs',
-  apikey: 'AdonixKey21e3lm8441', // Pon tu apikey aqui, consiguela en: https://api-adonix.ultraplus.click
+  apikey: 'Leonelkey22a5tm9999', // Pon tu apikey aqui, consiguela en: https://api-adonix.ultraplus.click
   prefijo: '.',
 
   owner: [
